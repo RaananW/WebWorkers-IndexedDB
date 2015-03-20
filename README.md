@@ -52,9 +52,9 @@ if (cursor) {
 
 Because it can be super heplful. Having a persisted model in a DB and having an external thread process it and update it can benefit a lot of applications - from games to heavy canvas manipulations (WebGL comes to mind as well). 
 
-##Suggestions?
+##Suggestions? Questions?
 
-If you need something specific please contact me.
+Simply contact me!
 
 ##MIT License
 
