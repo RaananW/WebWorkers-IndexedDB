@@ -11,6 +11,7 @@ Another option to send data to web workers is using IndexedDB. This option was n
 The idea came from basic worker patterns, for example:
 * http://www.infoq.com/news/2010/09/Patterns-Windows-Azure
 * AWS Worker in Elastic Beanstalk
+
 The suggest having a joined database between the main application and the worker, while only passing "tasks" or actions to
 the worker. The worker will then process the request using the shared database and will either alter the data there, or send a simple reply to the task.
 
