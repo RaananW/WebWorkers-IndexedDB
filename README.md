@@ -12,10 +12,12 @@ The idea came from basic worker patterns, for example:
 * http://www.infoq.com/news/2010/09/Patterns-Windows-Azure
 * AWS Worker in Elastic Beanstalk
 
-The suggest having a joined database between the main application and the worker, while only passing "tasks" or actions to
+that suggest having a joined database between the main application and the worker, while only passing "tasks" or actions to
 the worker. The worker will then process the request using the shared database and will either alter the data there, or send a simple reply to the task.
 
-The same can work in a web worker combined with indexedDB
+The same can work in a web worker combined with indexedDB.
+
+Using this method, spawning new workers won't require synchronizing data with them or sending each worker the entire data store - they are all synchronized using one single database.
 
 ##The Demo
 To introduce the combination of both technologies I have implemented a very quick demo available here - http://raananw.github.io/WebWorkers-IndexedDB/
