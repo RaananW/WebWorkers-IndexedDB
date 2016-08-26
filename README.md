@@ -1,4 +1,4 @@
-# WebWorkers with IndexedDB
+# Web Workers with IndexedDB
 ##About
 Running expensive processes on the main JS thread will cause the UI to flicker or the website be non-responsive. 
 
@@ -6,7 +6,18 @@ The solution that was introduced was web workers - JS code that is running concu
 
 Sending data to and from the web worker is done using JSON/String messages and ArrayBuffers. I will not be talking about the up and down sides of using both.
 
-Another option to send data to web workers is using IndexedDB. This option was not available at the beginning and is slowly being introduced to all of the major browsers (Chrome > 37, IE > 10, FF. Safari?... still waiting.).
+Another option to send data to web workers is using IndexedDB. This option was not available at the beginning and is slowly being introduced to all of the major browsers (Chrome >= 37, IE >= 10, FF >= 37. Safari?... still waiting.).
+
+The idea came from basic worker patterns, for example:
+* http://www.infoq.com/news/2010/09/Patterns-Windows-Azure
+* AWS Worker in Elastic Beanstalk
+
+that suggest having a joined database between the main application and the worker, while only passing "tasks" or actions to
+the worker. The worker will then process the request using the shared database and will either alter the data there, or send a simple reply to the task.
+
+The same can work in a web worker combined with indexedDB.
+
+Using this method, spawning new workers won't require synchronizing data with them or sending each worker the entire data store - they are all synchronized using one single database.
 
 ##The Demo
 To introduce the combination of both technologies I have implemented a very quick demo available here - http://raananw.github.io/WebWorkers-IndexedDB/
@@ -33,7 +44,7 @@ for (var i = 0; i < data.length; ++i) {
 ```javascript
 webworker.postMessage({ dbName: "webworkerTest", dbVersion:1, asArray: asArray });
 ```
-3. [WebWorker] Open the database, fetch all records from the store (using a cursor)
+3. [Web Worker] Open the database, fetch all records from the store (using a cursor)
 ```javascript
 //...
 var cursor = evt.target['result'];
@@ -42,8 +53,8 @@ if (cursor) {
     cursor.continue();
 }
 ```
-4. [WebWorker] Do the work (the exact same function that was used in the main thread's work). [Main Thread] Update the progress bar.
-5. [WebWorker] Notify the main thread that we are finished.
+4. [Web Worker] Do the work (the exact same function that was used in the main thread's work). [Main Thread] Update the progress bar.
+5. [Web Worker] Notify the main thread that we are finished.
 6. [Main thread] Load the records from the db (to simulate an update that was done by the web worker).
 7. ???
 8. Profit.
@@ -52,9 +63,9 @@ if (cursor) {
 
 Because it can be super heplful. Having a persisted model in a DB and having an external thread process it and update it can benefit a lot of applications - from games to heavy canvas manipulations (WebGL comes to mind as well). 
 
-##Suggestions?
+##Suggestions? Questions?
 
-If you need something specific please contact me.
+Simply contact me!
 
 ##MIT License
 

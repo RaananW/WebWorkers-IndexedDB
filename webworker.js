@@ -13,9 +13,9 @@ onmessage = function (e) {
         var items = [];
         trans.oncomplete = function (evt) {
             RaananW.WorkedIDBTest.doWork(items, function (progress) {
-                postMessage(progress, null);
+                postMessage(progress);
             }, function () {
-                postMessage("finished", null);
+                postMessage("finished");
             });
         };
         var cursorRequest = store.openCursor();
