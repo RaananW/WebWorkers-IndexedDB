@@ -1,5 +1,7 @@
 # Web Workers with IndexedDB
-##About
+
+## About
+
 Running expensive processes on the main JS thread will cause the UI to flicker or the website be non-responsive. 
 
 The solution that was introduced was web workers - JS code that is running concurrently to the main (UI) thread. Web workers have a very limited scope and very limits set of tools to interact with the browser and the DOM itself (https://developer.mozilla.org/en-US/docs/Web/API/Worker/Functions_and_classes_available_to_workers)
@@ -19,7 +21,8 @@ The same can work in a web worker combined with indexedDB.
 
 Using this method, spawning new workers won't require synchronizing data with them or sending each worker the entire data store - they are all synchronized using one single database.
 
-##The Demo
+## The Demo
+
 To introduce the combination of both technologies I have implemented a very quick demo available here - http://raananw.github.io/WebWorkers-IndexedDB/
 
 The site generates a random array of integers and is using this data to generate delays (or simulate work). It has the option to execute the work on both the main thread and a web worker.
@@ -63,11 +66,11 @@ if (cursor) {
 
 Because it can be super heplful. Having a persisted model in a DB and having an external thread process it and update it can benefit a lot of applications - from games to heavy canvas manipulations (WebGL comes to mind as well). 
 
-##Suggestions? Questions?
+## Suggestions? Questions?
 
 Simply contact me!
 
-##MIT License
+## MIT License
 
 Copyright (c) 2014-2015 Raanan Weber (info@raananweber.com)
 
